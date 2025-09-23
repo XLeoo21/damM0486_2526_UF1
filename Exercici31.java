@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Exercici23 {
+public class Exercici31 {
     static Scanner scan = new Scanner(System.in);
     static Random rand = new Random();
 
