@@ -12,6 +12,7 @@ public class Exercici22 {
         File f = new File("SaveFile.txt");
         String userString = "";
         FileOutputStream fos = new FileOutputStream(f);
+        
 
         while (!userString.equals("quit")) {
 

@@ -3,13 +3,16 @@ package Penjat.View;
 import java.util.Scanner;
 
 /*
- Vista estàtica encarregada d'interacció amb la consola.
- Aquesta versió afegeix salts de línia i format per fer la partida més agradable visualment.
+ PenjatView
+ - Encapsula tota la interacció per consola.
+ - Prové mètodes estàtics senzills per mostrar menús, demanar dades i mostrar missatges.
+ - Utilitza Scanner(System.in) compartit per evitar múltiples instàncies.
 */
 public class PenjatView {
 
-    static Scanner scan = new Scanner(System.in);
+    public static Scanner scan = new Scanner(System.in);
 
+    // Menú inicial (login/register/exit)
     public static void menuInicial() {
         System.out.println();
         System.out.println("====== MENU ======");
@@ -19,20 +22,22 @@ public class PenjatView {
         System.out.println();
     }
 
-    // Menú de sessió amb separació visual
+    // Menú de sessió: numeració coherent per admin i per usuari normal
     public static void menuJugar(boolean isAdmin) {
         System.out.println();
         System.out.println("====== JOC ======");
         System.out.println("1. Jugar");
         if (isAdmin) {
-            System.out.println("2. Afegir paraules");
-            System.out.println("3. Sortir");
+            System.out.println("2. Editar paraules");
+            System.out.println("3. Editar configuració");
+            System.out.println("4. Sortir");
         } else {
             System.out.println("2. Sortir");
         }
         System.out.println();
     }
 
+    // Missatge després de registrar
     public static void regOk(boolean u) {
         System.out.println();
         if(u == true) {
@@ -43,6 +48,7 @@ public class PenjatView {
         System.out.println();
     }
 
+    // Missatge després d'intentar login (mostra prompt si ha fallat)
     public static void logOk(boolean u){
         System.out.println();
         if(u == true) {
@@ -52,6 +58,7 @@ public class PenjatView {
         }
     }
 
+    // Lectures senzilles des de consola
     public static String askPass() {
         System.out.print("Introdueix la contrasenya: ");
         return scan.nextLine();
@@ -62,7 +69,7 @@ public class PenjatView {
         return scan.nextLine();
     }
 
-
+    // Sol·licita dades per registrar: nom visible, username, password
     public static String[] askRegister() {
         String[] user = new String[3];
         System.out.println();
@@ -76,6 +83,7 @@ public class PenjatView {
         return user;
     }
 
+    // Pide usuario y contraseña para login
     public static String[] askLogin() {
         String[] user = new String[2];
         System.out.println();
@@ -87,6 +95,7 @@ public class PenjatView {
         return user;
     }
 
+    // Llegeix una opció numèrica amb control d'errors
     public static int askOption() {
         System.out.print("Introdueix la teva opcio: ");
         int op = 0;
@@ -107,7 +116,7 @@ public class PenjatView {
         return scan.nextLine();
     }
 
-    // Mostrar la llista de paraules amb una línia en blanc abans i després
+    // Mostra la llista de paraules i la opció per afegir (N)
     public static void showWords(String[] words) {
         System.out.println();
         System.out.println("Llista de paraules:");
@@ -118,6 +127,7 @@ public class PenjatView {
                 System.out.println((i+1) + ". " + words[i]);
             }
         }
+        System.out.println("N. Afegir paraula nova");
         System.out.println();
     }
 
@@ -126,14 +136,19 @@ public class PenjatView {
         return scan.nextLine().trim();
     }
 
-    // Missatge genèric amb salt de línia abans
+    public static String askEditSelection() {
+        System.out.print("Selecciona número per editar o 'N' per afegir: ");
+        return scan.nextLine().trim();
+    }
+
+    // Missatge genèric amb separació
     public static void showMessage(String msg) {
         System.out.println();
         System.out.println(msg);
         System.out.println();
     }
 
-    // Mostra la paraula enmascarada centrada amb salts de línia addicionals per destacar-la
+    // Muestra la paraula enmascarada
     public static void showMaskedWord(String masked) {
         System.out.println();
         System.out.println("Paraula:");
@@ -142,15 +157,33 @@ public class PenjatView {
         System.out.println();
     }
 
-    // Entrada de lletra o paraula amb una línia en blanc abans per separar del text anterior
+    // Pide letra o palabra entera
     public static String askLetter() {
         System.out.print("Introdueix una lletra o la paraula sencera: ");
         return scan.nextLine().trim().toLowerCase();
     }
 
-    // Mostra el comptador d'errors amb una línia en blanc per separació
+    // Muestra errores / máximos
     public static void showWrongCount(int wrongs, int maxWrongs) {
         System.out.println("Errors: " + wrongs + " / " + maxWrongs);
     }
 
+    // Mostra benvinguda amb punts actuals
+    public static void showWelcome(String name, int punts) {
+        System.out.println();
+        System.out.println("Benvingut/da " + name + ". Tens " + punts + " punts");
+        System.out.println();
+    }
+
+    // Pide un int amb validació
+    public static int askInt(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            try {
+                return Integer.parseInt(scan.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Valor no vàlid. Torna-ho a intentar.");
+            }
+        }
+    }
 }

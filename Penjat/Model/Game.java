@@ -3,28 +3,45 @@ package Penjat.Model;
 import Penjat.View.PenjatView;
 
 /*
- Classe que encapsula tota la lògica de la partida del penjat.
- Conté el bucle de joc, estat (paraula, masked, tried, wrongs) i totes les comprovacions.
- No fa prints directes; utilitza PenjatView per a la I/O.
+ Game
+ - Gestiona una partida individual del penjat.
+ - No persisteix l'usuari directament; retorna el delta de punts perquè el controlador el guardi.
+ - Lògica:
+   - Agafa una paraula aleatòria de WordManager.
+   - Manté estat local: paraula oculta, lletres provades, wrongs.
+   - processGuess: processa una lletra o intent de paraula sencera; no fa saves.
+   - play: bucle principal; retorna +scoreWord si ha guanyat, -5 si ha perdut, 0 si sense canvi.
 */
 public class Game {
 
-    private final int MAX_WRONGS = 6;
-    private String word; // paraula actual
-    private char[] paraulaOculta; // paraula amb lletres revelades
-    private boolean[] tried; // lletres provades a..z
-    private int wrongs;
+    private String word;            // paraula actual
+    private char[] paraulaOculta;   // estat de la paraula mostrada
+    private boolean[] tried;        // lletres provades (a..z)
+    private int wrongs;             // errors actuals
+    private int maxWrongs;          // màxim d'errors (de Config)
+    private int scoreWord;          // puntuació assignada a la paraula
+    private User currentUser;       // referència local a l'usuari (no s'usa per salvar)
 
-    // Crea una nova partida amb una paraula aleatòria obtinguda de WordManager
-    public Game() {
-        this.word = WordManager.getRandomWord();
-        if (this.word != null) {
-            this.word = this.word.toLowerCase().trim();
-            initState();
+    // Constructor: rep l'usuari i la config per establir maxWrongs
+    public Game(User u, Config cfg) {
+        this.currentUser = u;
+        WordManager.WordEntry entry;
+        try {
+            entry = WordManager.getRandomEntry();
+        } catch (Exception e) {
+            entry = null;
         }
+        if (entry == null) {
+            this.word = null;
+            return;
+        }
+        this.word = entry.word.toLowerCase().trim();
+        this.scoreWord = entry.score;
+        this.maxWrongs = cfg.getMaxIntents();
+        initState();
     }
 
-    // Inicialitza masked, tried i paraulaOculta segons la paraula actual
+    // Inicialitza l'estat de la partida (paraula oculta, array de tried, wrongs)
     private void initState() {
         int len = word.length();
         this.paraulaOculta = new char[len];
@@ -33,7 +50,7 @@ public class Game {
             if (Character.isLetter(c))
                 paraulaOculta[i] = '_';
             else
-                paraulaOculta[i] = c;
+                paraulaOculta[i] = c; // caràcters no alfabètics es mostren directament
         }
         this.tried = new boolean[26];
         this.wrongs = 0;
@@ -44,7 +61,7 @@ public class Game {
         return this.word != null;
     }
 
-    // Construeix i retorna la cadena formatejada a mostrar (p.ex. "t _ s")
+    // Retorna la paraula enmascarada com a String per la vista (p.ex. "t _ s")
     private String getMaskedAsString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < paraulaOculta.length; i++) {
@@ -55,7 +72,7 @@ public class Game {
         return sb.toString();
     }
 
-    // Comprova si totes les lletres han estat revelades
+    // Comprova si totes les lletres estan revelades
     private boolean isAllRevealed() {
         for (char c : paraulaOculta)
             if (c == '_')
@@ -63,8 +80,8 @@ public class Game {
         return true;
     }
 
-    // Processa un intent de l'usuari; retorna true si la partida ha acabat
-    // (victòria o derrota)
+    // Processa un intent (lletra o paraula); retorna true si la partida ha finalitzat
+    // IMPORTANT: no modifica ni guarda l'usuari persistent; només actualitza l'estat local
     public boolean processGuess(String guess) {
         if (guess == null || guess.isBlank()) {
             PenjatView.showMessage("Entrada buida, intenta-ho de nou.");
@@ -101,9 +118,8 @@ public class Game {
                 PenjatView.showMessage("Lletra correcta!");
             }
         } else {
-            // l'usuari prova la paraula sencera
+            // Intent de paraula sencera
             if (guess.equalsIgnoreCase(word)) {
-                // revelarem tota la paraula per coherència amb la View
                 for (int i = 0; i < word.length(); i++)
                     paraulaOculta[i] = word.charAt(i);
                 PenjatView.showMessage("Has encertat la paraula!");
@@ -114,8 +130,8 @@ public class Game {
             }
         }
 
-        // comprovar condicions finals
-        if (wrongs >= MAX_WRONGS) {
+        // Comprovacions finals de derrota/victòria
+        if (wrongs >= maxWrongs) {
             PenjatView.showMessage("Has perdut. La paraula era: " + word);
             return true;
         }
@@ -123,24 +139,31 @@ public class Game {
             PenjatView.showMessage("Enhorabona! Has encertat la paraula: " + word);
             return true;
         }
-        return false; // la partida continua
+        return false;
     }
 
-    // Mètode que controla i realitza la partida: bucle que fa I/O via PenjatView
-    public void play() {
+    // Play: bucle principal del joc; retorna delta de punts: +scoreWord, -5 o 0
+    public int play() {
         if (!hasWord()) {
-            PenjatView.showMessage("No hi ha paraules al fitxer. Admin ha d'afegir paraules primer.");
-            return;
+            PenjatView.showMessage("No hi ha paraules al fitxer. L'admin ha d'afegir paraules primer.");
+            return 0;
         }
+
         while (true) {
             PenjatView.showMaskedWord(getMaskedAsString());
-            PenjatView.showWrongCount(wrongs, MAX_WRONGS);
+            PenjatView.showWrongCount(wrongs, maxWrongs);
             String guess = PenjatView.askLetter();
             boolean finished = processGuess(guess);
             if (finished)
                 break;
         }
 
+        if (isAllRevealed()) {
+            return scoreWord; // victòria: sumar la puntuació de la paraula
+        }
+        if (wrongs >= maxWrongs) {
+            return -5; // derrota: penalització fixada (-5)
+        }
+        return 0; // cap canvi (cas poc probable)
     }
-
 }
