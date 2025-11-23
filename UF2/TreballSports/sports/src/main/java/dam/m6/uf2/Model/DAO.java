@@ -5,8 +5,8 @@ import java.util.List;
 public interface DAO<T> {
    void add(T item);
    List<T> getAll();
-   // List<T> getAll(String filter);
-   // boolean checkPass(String name, String pass);
-   // delete 
-   // update
+   List<T> getAll(int filter);
+   List<T> getAll(String filter);
+   List<T> getOne(String filter);
+
 }

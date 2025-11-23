@@ -3,6 +3,8 @@ package dam.m6.uf2.Controller;
 import java.sql.Statement;
 import java.util.List;
 
+import dam.m6.uf2.Model.Atleta;
+import dam.m6.uf2.Model.AtletaDAO;
 import dam.m6.uf2.Model.ConnectionManager;
 import dam.m6.uf2.Model.Esport;
 import dam.m6.uf2.Model.EsportDAO;
@@ -23,29 +25,48 @@ public class SportsManager {
 
 	private void init() throws SQLException {
 		this.conn = ConnectionManager.getConnection("database.xml");
-		int option = 0;
+		int option = 0, codEsport = 0;
+		String name = "", atletaName = "", esportName = "";
 
 		EsportDAO EsportDAO = new EsportDAO(conn);
+		AtletaDAO AtletaDAO = new AtletaDAO(conn);
+		List<Esport> esports = new EsportDAO(conn).getAll();
 
 		while (option != 5) {
 			MainView mainView = new MainView();
 			option = mainView.mainMenu();
 			switch (option) {
 				case 1:
-					String esportName = MainView.esportForm();
+					esportName = MainView.esportForm();
 					Esport newEsport = new Esport(0, esportName);
 					EsportDAO.add(newEsport);
-					// mainView.showUsers(DeportistaPgDAO.getAll());
 					break;
 
 				case 2:
-
+					atletaName = MainView.atletaForm();
+					MainView.showMessage("---------------------------------------------");
+					MainView.LlistaEsports(esports);
+					MainView.showMessage("---------------------------------------------");
+					codEsport = MainView.askCodEsport();
+					Atleta newAtleta = new Atleta(0, atletaName, codEsport);
+					AtletaDAO.add(newAtleta);
 					break;
 				case 3:
+					name = MainView.askName();
+					List<Atleta> atleta = new AtletaDAO(conn).getOne(name);
+					MainView.showMessage("---------------------------------------------");
+					MainView.LlistaAtletas(atleta);
+					MainView.showMessage("---------------------------------------------");
 					break;
 				case 4:
-					List<Esport> esports = new EsportDAO(conn).getAll();
+					MainView.showMessage("---------------------------------------------");
 					MainView.LlistaEsports(esports);
+					MainView.showMessage("---------------------------------------------");
+					codEsport = MainView.askCodEsport();
+					List<Atleta> atletas = new AtletaDAO(conn).getAll(codEsport);
+					MainView.showMessage("---------------------------------------------");
+					MainView.LlistaAtletas(atletas);
+					MainView.showMessage("---------------------------------------------");
 					break;
 				case 5:
 					MainView.showMessage("Tancant connexió, adeeeuuuu!");
@@ -53,9 +74,6 @@ public class SportsManager {
 					break;
 			}
 		}
-
-		// Afegir Usuari
-		// Llistar usuaris
 
 	}
 }

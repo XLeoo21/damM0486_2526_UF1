@@ -16,4 +16,8 @@ public class Esport {
 	public String getNom() {
 		return nom;
 	}
+
+	public int getCod() {
+		return cod;
+	}
 }

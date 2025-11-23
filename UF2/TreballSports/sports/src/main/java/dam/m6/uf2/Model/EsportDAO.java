@@ -54,4 +54,22 @@ public class EsportDAO implements DAO<Esport> {
         return esports;
     }
 
+    @Override
+    public List<Esport> getOne(String filter) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getOne'");
+    }
+
+    @Override
+    public List<Esport> getAll(int filter) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+    }
+
+    @Override
+    public List<Esport> getAll(String filter) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+    }
+
 }
