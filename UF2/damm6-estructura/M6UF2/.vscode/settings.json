@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\alex\\Downloads\\postgresql-42.7.4.jar"
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
+}

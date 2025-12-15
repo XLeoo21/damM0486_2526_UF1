@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-configuration>
+    <session-factory>
+        <!-- Conexión a la base de datos -->
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/users</property>        
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">1234</property>
+       
+        <property name="hibernate.default_schema">public</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hbm2ddl.auto">update</property> <!-- create / create-drop / update -->
+        
+        <!-- Mostrar SQL en consola -->
+        <property name="show_sql">false</property>
+        <property name="format_sql">false</property>
+        
+        <!-- Mapeo de las clases -->
+        <mapping class="castellet.dam.m12.uf2.hibernate.User"/>
+    </session-factory>
+</hibernate-configuration>
