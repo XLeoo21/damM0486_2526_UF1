@@ -1,0 +1,202 @@
+[
+  {
+    "nom": "Laura",
+    "cognom1": "Martínez",
+    "cognom2": "Soler",
+    "dataEntrada": { "$date": "2024-10-10T00:00:00Z" },
+    "completa": true,
+    "observacions": "Bon treball inicial"
+  },
+  {
+    "nom": "Marc",
+    "cognom1": "Puig",
+    "cognom2": "Roca",
+    "dataEntrada": { "$date": "2024-10-12T00:00:00Z" },
+    "completa": false,
+    "observacions": "Falta documentació"
+  },
+  {
+    "nom": "Anna",
+    "cognom1": "López",
+    "cognom2": "Vila",
+    "dataEntrada": { "$date": "2024-10-15T00:00:00Z" },
+    "completa": true,
+    "observacions": "Bon plantejament"
+  },
+  {
+    "nom": "Pol",
+    "cognom1": "Serra",
+    "cognom2": "Casals",
+    "dataEntrada": { "$date": "2024-10-18T00:00:00Z" },
+    "completa": false,
+    "observacions": "Cal revisar el codi"
+  },
+  {
+    "nom": "Laura",
+    "cognom1": "Martínez",
+    "cognom2": "Soler",
+    "dataEntrada": { "$date": "2024-10-20T00:00:00Z" },
+    "completa": true,
+    "observacions": "Tasques entregades correctament"
+  },
+  {
+    "nom": "Marc",
+    "cognom1": "Puig",
+    "cognom2": "Roca",
+    "dataEntrada": { "$date": "2024-10-22T00:00:00Z" },
+    "completa": true,
+    "observacions": "Bon treball final"
+  },
+  {
+    "nom": "Anna",
+    "cognom1": "López",
+    "cognom2": "Vila",
+    "dataEntrada": { "$date": "2024-10-25T00:00:00Z" },
+    "completa": false,
+    "observacions": "Falten comentaris"
+  },
+  {
+    "nom": "Pol",
+    "cognom1": "Serra",
+    "cognom2": "Casals",
+    "dataEntrada": { "$date": "2024-10-28T00:00:00Z" },
+    "completa": true,
+    "observacions": "Bon ús de MongoDB"
+  },
+  {
+    "nom": "Júlia",
+    "cognom1": "Ferrer",
+    "cognom2": "Ortiz",
+    "dataEntrada": { "$date": "2024-11-02T00:00:00Z" },
+    "completa": false,
+    "observacions": "Cal millorar les consultes"
+  },
+  {
+    "nom": "Júlia",
+    "cognom1": "Ferrer",
+    "cognom2": "Ortiz",
+    "dataEntrada": { "$date": "2024-11-05T00:00:00Z" },
+    "completa": true,
+    "observacions": "Bon progrés"
+  },
+  {
+    "nom": "Marc",
+    "cognom1": "Puig",
+    "cognom2": "Roca",
+    "dataEntrada": { "$date": "2024-11-08T00:00:00Z" },
+    "completa": false,
+    "observacions": "Falta part pràctica"
+  },
+  {
+    "nom": "Laura",
+    "cognom1": "Martínez",
+    "cognom2": "Soler",
+    "dataEntrada": { "$date": "2024-11-10T00:00:00Z" },
+    "completa": true,
+    "observacions": "Bon seguiment del projecte"
+  },
+  {
+    "nom": "Pol",
+    "cognom1": "Serra",
+    "cognom2": "Casals",
+    "dataEntrada": { "$date": "2024-11-12T00:00:00Z" },
+    "completa": false,
+    "observacions": "Cal revisar errors"
+  },
+  {
+    "nom": "Anna",
+    "cognom1": "López",
+    "cognom2": "Vila",
+    "dataEntrada": { "$date": "2024-11-15T00:00:00Z" },
+    "completa": true,
+    "observacions": "Bon treball en equip"
+  },
+  {
+    "nom": "Júlia",
+    "cognom1": "Ferrer",
+    "cognom2": "Ortiz",
+    "dataEntrada": { "$date": "2024-11-18T00:00:00Z" },
+    "completa": true,
+    "observacions": "Tasques completes"
+  },
+  {
+    "nom": "Marc",
+    "cognom1": "Puig",
+    "cognom2": "Roca",
+    "dataEntrada": { "$date": "2024-11-20T00:00:00Z" },
+    "completa": true,
+    "observacions": "Bon resultat"
+  },
+  {
+    "nom": "Laura",
+    "cognom1": "Martínez",
+    "cognom2": "Soler",
+    "dataEntrada": { "$date": "2024-11-22T00:00:00Z" },
+    "completa": false,
+    "observacions": "Entrega fora de termini"
+  },
+  {
+    "nom": "Pol",
+    "cognom1": "Serra",
+    "cognom2": "Casals",
+    "dataEntrada": { "$date": "2024-11-25T00:00:00Z" },
+    "completa": true,
+    "observacions": "Bon disseny de dades"
+  },
+  {
+    "nom": "Anna",
+    "cognom1": "López",
+    "cognom2": "Vila",
+    "dataEntrada": { "$date": "2024-11-28T00:00:00Z" },
+    "completa": false,
+    "observacions": "Cal millorar el rendiment"
+  },
+  {
+    "nom": "Júlia",
+    "cognom1": "Ferrer",
+    "cognom2": "Ortiz",
+    "dataEntrada": { "$date": "2024-12-01T00:00:00Z" },
+    "completa": true,
+    "observacions": "Bon treball final"
+  },
+  {
+    "nom": "Marc",
+    "cognom1": "Puig",
+    "cognom2": "Roca",
+    "dataEntrada": { "$date": "2024-12-03T00:00:00Z" },
+    "completa": false,
+    "observacions": "Falten proves"
+  },
+  {
+    "nom": "Laura",
+    "cognom1": "Martínez",
+    "cognom2": "Soler",
+    "dataEntrada": { "$date": "2024-12-05T00:00:00Z" },
+    "completa": true,
+    "observacions": "Bon tancament del projecte"
+  },
+  {
+    "nom": "Pol",
+    "cognom1": "Serra",
+    "cognom2": "Casals",
+    "dataEntrada": { "$date": "2024-12-08T00:00:00Z" },
+    "completa": true,
+    "observacions": "Resultat molt correcte"
+  },
+  {
+    "nom": "Anna",
+    "cognom1": "López",
+    "cognom2": "Vila",
+    "dataEntrada": { "$date": "2024-12-10T00:00:00Z" },
+    "completa": true,
+    "observacions": "Bon treball final"
+  },
+  {
+    "nom": "Júlia",
+    "cognom1": "Ferrer",
+    "cognom2": "Ortiz",
+    "dataEntrada": { "$date": "2024-12-12T00:00:00Z" },
+    "completa": false,
+    "observacions": "Cal revisar l'última part"
+  }
+]
