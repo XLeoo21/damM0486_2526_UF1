@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "_id",
+    "altura",
+    "assistencia",
+    "cognom",
+    "edat",
+    "nom",
+    "objectius",
+    "pes",
+    "rutina",
+    "subscripcio"
+  ],
+  "properties": {
+    "_id": {
+      "$ref": "#/$defs/ObjectId"
+    },
+    "altura": {
+      "type": "integer"
+    },
+    "assistencia": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "cognom": {
+      "type": "string"
+    },
+    "edat": {
+      "type": "integer"
+    },
+    "nom": {
+      "type": "string"
+    },
+    "objectius": {
+      "type": "string"
+    },
+    "pes": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "$ref": "#/$defs/Double"
+        }
+      ]
+    },
+    "rutina": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "subscripcio": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "ObjectId": {
+      "type": "object",
+      "properties": {
+        "$oid": {
+          "type": "string",
+          "pattern": "^[0-9a-fA-F]{24}$"
+        }
+      },
+      "required": [
+        "$oid"
+      ],
+      "additionalProperties": false
+    },
+    "Double": {
+      "oneOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "$numberDouble": {
+              "enum": [
+                "Infinity",
+                "-Infinity",
+                "NaN"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}
