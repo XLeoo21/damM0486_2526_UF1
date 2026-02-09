@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 });
 
 // Obtenir tots els socis
-app.get('/socis', async (req, res) => {
+app.get('/list', async (req, res) => {
     try {
         const socis = await Soci.find();
         res.status(200).json(socis);
@@ -52,7 +52,7 @@ app.get('/socis', async (req, res) => {
 });
 
 // Afegir un nou soci
-app.post('/socis', async (req, res) => {
+app.post('/add', async (req, res) => {
     try {
         const nouSoci = new Soci(req.body);
         await nouSoci.save();
