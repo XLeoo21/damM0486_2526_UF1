@@ -1,0 +1,144 @@
+# GymManager API
+
+Projecte desplegat a Vercel:  
+https://m6uf3api-livid.vercel.app/
+
+Aquesta API permet gestionar socis d'un gimnàs amb MongoDB i Mongoose.
+
+---
+
+## Endpoints
+
+### Ruta arrel
+Mostra un missatge que la API està funcionant.
+
+GET /
+
+Exemple:
+
+https://m6uf3api-livid.vercel.app/
+
+
+---
+
+### Llistar tots els socis
+Retorna tots els socis de la base de dades.
+
+
+
+GET /list
+
+
+Exemple:
+
+
+https://m6uf3api-livid.vercel.app/list
+
+
+---
+
+### Afegir un nou soci
+Afegeix un soci enviant un JSON amb les seves dades.
+
+
+
+POST /add
+
+
+Exemple de cos de la sol·licitud (JSON):
+```json
+{
+  "nom": "Marc",
+  "cognom": "López",
+  "edat": 30,
+  "pes": 78.2,
+  "altura": 175,
+  "subscripcio": "Anual",
+  "rutina": ["Pes lliure","CrossFit"],
+  "assistencia": ["2026-01-01","2026-01-03","2026-01-05"],
+  "objectius": "Guanyar massa muscular"
+}
+
+
+Exemple:
+
+https://m6uf3api-livid.vercel.app/add
+
+
+
+Filtrar socis per nom
+
+Retorna tots els socis amb un nom concret.
+
+GET /socis/nom/:nom
+
+
+Paràmetre:
+
+:nom → Nom del soci a cercar.
+
+Exemple:
+
+https://m6uf3api-livid.vercel.app/socis/nom/Marc
+
+
+
+
+Filtrar socis per dates d'assistència
+
+Retorna socis que hagin assistit entre dues dates (format string YYYY-MM-DD).
+
+GET /socis/entre-dates/:start/:end
+
+
+Paràmetres:
+
+:start → Data inicial.
+
+:end → Data final.
+
+Exemple:
+
+https://m6uf3api-livid.vercel.app/socis/entre-dates/2026-01-01/2026-01-31
+
+
+
+
+
+Actualitzar un soci per ID
+
+Actualitza un soci enviant un JSON amb les dades a modificar.
+
+PUT /socis/:id
+
+
+Paràmetre:
+
+:id → ID del soci a actualitzar.
+
+Exemple:
+
+https://m6uf3api-livid.vercel.app/socis/641f1b2c3a5d4e6f7a8b9c0d
+
+
+Cos de la sol·licitud (JSON):
+
+{
+  "pes": 80,
+  "altura": 176
+}
+
+
+
+
+
+Eliminar un soci per ID
+
+Elimina un soci segons el seu ID.
+
+DELETE /socis/:id
+
+
+Exemple:
+
+https://m6uf3api-livid.vercel.app/socis/641f1b2c3a5d4e6f7a8b9c0d
