@@ -26,7 +26,7 @@ const socisSchema = new mongoose.Schema({
     altura: Number,
     subscripcio: String,
     rutina: [String],
-    assistencia: [Date],
+    assistencia: [String],
     objectius: String
 });
 
@@ -74,17 +74,26 @@ app.get('/socis/nom/:nom', async (req, res) => {
 });
 
 // Filtrar socis per dates d'assistència
-app.get('/socis/assistencia/:start/:end', async (req, res) => {
-    try {
-        const { start, end } = req.params;
-        const result = await Soci.find({
-            assistencia: { $gte: new Date(start), $lte: new Date(end) }
-        });
-        res.status(200).json(result);
-    } catch (err) {
-        res.status(500).json({ message: 'Error fetching socis by dates', error: err.message });
-    }
+app.get('/socis/entre-dates/:start/:end', async (req, res) => {
+  try {
+    const { start, end } = req.params;
+
+    const socis = await Soci.find({
+      assistencia: {
+        $elemMatch: {
+          $gte: start,
+          $lte: end
+        }
+      }
+    });
+
+    res.status(200).json(socis);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
+
+
 
 // Actualitzar un soci per ID
 app.put('/socis/:id', async (req, res) => {
