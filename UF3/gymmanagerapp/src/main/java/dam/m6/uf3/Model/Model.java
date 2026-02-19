@@ -128,7 +128,7 @@ public class Model {
         String cognom = doc.getString("cognom");
         int edat = doc.getInteger("edat");
 
-        // 🔥 LÍNIA CLAVE CORREGIDA
+        
         double pes = ((Number) doc.get("pes")).doubleValue();
 
         int altura = doc.getInteger("altura");
