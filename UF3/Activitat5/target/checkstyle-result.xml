@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.45.1">
+<file name="C:\Users\Lionnel Laguna\Desktop\DAM\Institut Castellet\DAM 2\M06 - Acces a dades\UF3\gymmanagerapp\src\main\java\dam\m6\uf3\Controller\Controller.java">
+<error line="1" column="9" severity="error" message="El nombre &apos;main.java.dam.m6.uf3.Controller&apos; debe coincidir con el patrón &apos;^[a-z]+(\.[a-z][a-z0-9]*)*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
+<error line="7" column="1" severity="error" message="Clases de servicios públicos no deben tener un constructor público o por defecto." source="com.puppycrawl.tools.checkstyle.checks.design.HideUtilityClassConstructorCheck"/>
+<error line="7" column="1" severity="error" message="Falta el comentario Javadoc." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+<error line="9" column="5" severity="error" message="Falta el comentario Javadoc." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="23" column="11" severity="error" message="Capturar la excepción &apos;Exception&apos; no está permitido." source="com.puppycrawl.tools.checkstyle.checks.coding.IllegalCatchCheck"/>
+</file>
+<file name="C:\Users\Lionnel Laguna\Desktop\DAM\Institut Castellet\DAM 2\M06 - Acces a dades\UF3\gymmanagerapp\src\main\java\dam\m6\uf3\Model\ConnectionManager.java">
+<error line="1" column="1" severity="error" message="Falta la declaración de paquete." source="com.puppycrawl.tools.checkstyle.checks.coding.PackageDeclarationCheck"/>
+<error line="5" column="1" severity="error" message="Clases de servicios públicos no deben tener un constructor público o por defecto." source="com.puppycrawl.tools.checkstyle.checks.design.HideUtilityClassConstructorCheck"/>
+<error line="5" column="1" severity="error" message="Falta el comentario Javadoc." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+<error line="8" severity="error" message="La línea es mayor de 120 caracteres (encontrado 132)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="13" severity="error" message="La primera frase debería finalizar con un punto." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocStyleCheck"/>
+</file>
+<file name="C:\Users\Lionnel Laguna\Desktop\DAM\Institut Castellet\DAM 2\M06 - Acces a dades\UF3\gymmanagerapp\src\test\java\dam\m6\uf3\AppTest.java">
+</file>
+</checkstyle>
