@@ -37,7 +37,7 @@ public class Model {
 
             CompletableFuture<HttpResponse<String>> responseFuture = httpClient.sendAsync(request,
                     HttpResponse.BodyHandlers.ofString());
-
+            
             responseFuture.thenAccept(response -> {
                 String body = response.body();
                 socisList.addAll(parseSocis(body));
@@ -47,7 +47,7 @@ public class Model {
                 responseReceived = true;
                 return null;
             });
-
+            
             while (!responseReceived)
                 Thread.sleep(100);
 
@@ -66,7 +66,7 @@ public class Model {
             String jsonBody = s.toJson();
 
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI(BASE_URL + "/add_soci"))
+                    .uri(new URI(BASE_URL + "/add"))
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
                     .build();
@@ -175,57 +175,48 @@ public class Model {
 
     // ───────────── PARSE JSON A SOCIS ─────────────
     private List<Socis> parseSocis(String json) {
-        List<Socis> llista = new ArrayList<>();
-
-        if (json == null || json.trim().isEmpty() || json.equals("[]") || json.contains("message")) {
-            return llista;
-        }
-
-        try {
-
-            JSONObject wrapper = new JSONObject(json);
-
-            JSONArray arr;
-            if (wrapper.has("data")) {
-                arr = wrapper.getJSONArray("data");
-            } else {
-
-                arr = new JSONArray(json);
-            }
-
-            for (int i = 0; i < arr.length(); i++) {
-                JSONObject obj = arr.getJSONObject(i);
-
-                String nom = obj.getString("nom");
-                String cognom = obj.getString("cognom");
-                int edat = obj.getInt("edat");
-                double pes = obj.getDouble("pes");
-                int altura = obj.getInt("altura");
-                String subscripcio = obj.getString("subscripcio");
-
-                // Rutina
-                ArrayList<String> rutina = new ArrayList<>();
-                JSONArray rut = obj.getJSONArray("rutina");
-                for (int j = 0; j < rut.length(); j++) {
-                    rutina.add(rut.getString(j));
-                }
-
-                // Assistència
-                ArrayList<LocalDate> assist = new ArrayList<>();
-                JSONArray ass = obj.getJSONArray("assistencia");
-                for (int j = 0; j < ass.length(); j++) {
-                    assist.add(LocalDate.parse(ass.getString(j)));
-                }
-
-                String objectius = obj.getString("objectius");
-
-                llista.add(new Socis(nom, cognom, edat, pes, altura, subscripcio, rutina, assist, objectius));
-            }
-
-        } catch (Exception e) {
-            System.err.println("Error parseando JSON: " + e.getMessage());
-        }
-
+    List<Socis> llista = new ArrayList<>();
+    if (json == null || json.trim().isEmpty() || json.equals("[]") || json.contains("message")) {
         return llista;
     }
+
+    try {
+        // Crear JSONArray directamente
+        JSONArray arr = new JSONArray(json);
+
+        for (int i = 0; i < arr.length(); i++) {
+            JSONObject obj = arr.getJSONObject(i);
+
+            String nom = obj.getString("nom");
+            String cognom = obj.getString("cognom");
+            int edat = obj.getInt("edat");
+            double pes = obj.getDouble("pes");
+            int altura = obj.getInt("altura");
+            String subscripcio = obj.getString("subscripcio");
+
+            // Rutina
+            JSONArray rutinaArr = obj.getJSONArray("rutina");
+            ArrayList<String> rutina = new ArrayList<>();
+            for (int j = 0; j < rutinaArr.length(); j++) {
+                rutina.add(rutinaArr.getString(j));
+            }
+
+            // Assistència
+            JSONArray assistArr = obj.getJSONArray("assistencia");
+            ArrayList<LocalDate> assistencia = new ArrayList<>();
+            for (int j = 0; j < assistArr.length(); j++) {
+                assistencia.add(LocalDate.parse(assistArr.getString(j)));
+            }
+
+            String objectius = obj.getString("objectius");
+
+            Socis s = new Socis(nom, cognom, edat, pes, altura, subscripcio, rutina, assistencia, objectius);
+            llista.add(s);
+        }
+    } catch (Exception e) {
+        System.out.println("Error parseando JSON: " + e.getMessage());
+    }
+
+    return llista;
+}
 }
